@@ -44,8 +44,8 @@ Once you have your newly entity which already exists in the database and might o
      ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png)
   
   
-     ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png)
+     ![alt](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png)
   
   
    ### Using UpdateIfModified
-     ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_sql_usingCustomUpdate.png)
+     ![al](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_sql_usingCustomUpdate.png)
