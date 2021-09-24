@@ -20,17 +20,33 @@ Once you have your newly entity which already exists in the database and might o
   
   Another solution would be using multiple if's for every property and if the values differ then set it's state to modified , this assures that ef core will launch update only on the modified props but it's tedious and error prone if you have an fat object.
   
+ ```
+   public void UpdateIfModified<T>(Employee existingEntity, Employee modifiedExistingEntity)
+        {
+            if(existingEntity.FirstName != modifiedExistingEntity.FirstName)
+            {
+                context.Entry(existingEntity).Property("FirstName").CurrentValue = modifiedExistingEntity.FirstName;
+            }
 
+            if (existingEntity.LastName != modifiedExistingEntity.LastName)
+            {
+                context.Entry(existingEntity).Property("LastNane").CurrentValue = modifiedExistingEntity.LastName;
+            }
+
+            // etc...
+        }
+```
   
   Using this approach also means you have to do the same for every entity which you want to check for changes, UpdateIfModified can be reused with different types due to it's generic implementation
   
  ## SQL generated
-  ### Using the common context.Update :
+   ### Using the common context.Update : ### 
+  
      ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png)
   
   
      ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png)
   
   
-   ### Using UpdateIfModified
+    Using UpdateIfModified
      ![alt text]https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_sql_usingCustomUpdate.png)
