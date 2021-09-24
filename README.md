@@ -17,7 +17,7 @@ Once you have your newly entity which already exists in the database and might o
   
  ## Other solution
   
-  Another solution would be using multiple if's for every property and if the values differ then set it's state to modified , this assures that ef core will launch update only on the modified props but it is tedious and error prone if you have a fat object.
+  Another solution would be using multiple ifs for every property and if the values differ then set it's state to modified , this assures that ef core will launch update only on the modified props but this may become tedious and error prone if you have a fat object.
   
  ```c#
    public void UpdateIfModified<T>(Employee existingEntity, Employee modifiedExistingEntity)
