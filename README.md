@@ -41,7 +41,7 @@ Once you have your newly entity which already exists in the database and might o
   
  ## SQL generated
   ### Using the common context.Update :
-     ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png)
+     ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png?raw=true)
   
   
      ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png)
