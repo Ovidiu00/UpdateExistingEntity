@@ -19,7 +19,7 @@ Once you have your newly entity which already exists in the database and might o
   
   Another solution would be using multiple if's for every property and if the values differ then set it's state to modified , this assures that ef core will launch update only on the modified props but it is tedious and error prone if you have a fat object.
   
- ```
+ ```c#
    public void UpdateIfModified<T>(Employee existingEntity, Employee modifiedExistingEntity)
         {
             if(existingEntity.FirstName != modifiedExistingEntity.FirstName)
@@ -42,10 +42,38 @@ Once you have your newly entity which already exists in the database and might o
   
  ## SQL generated
   ### Using the common context.Update 
-  
-  <img src="https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png" >   
-  <img src="https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png" >
+   ```c#
+            using var context = new DemoDBContext();
+            var modifiedExistingEntity = new Employee() // we know that an employee with the key '123_x' already exists in the DB
+            {
+                EmployeeId = "123_x",
+                FirstName = "Dorel"
+            };
+
+            context.Update(modifiedExistingEntity);
+            context.SaveChanges();
+   ```
+  <img src="https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/updateSql_usingUpdate.png" height=260px>
   
    ### Using UpdateIfModified
+  ```c#
+           using var context = new DemoDBContext();
+            
+            var existingEmployee = context.Employees.Find("123_x");
+
+            var modifiedExistingEntity = new Employee()
+            {
+                EmployeeId = "123_x",
+                FirstName = "sfdsfd"
+            };
+
+
+            var utilityObject = new UtilityClass(context);
+            utilityObject.UpdateIfModified<Employee>(existingEmployee, modifiedExistingEntity);
+
+            context.SaveChanges();
+  
+  
+  ```
   <img src="https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_sql_usingCustomUpdate.png">
   
