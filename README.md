@@ -40,7 +40,7 @@ Once you have your newly entity which already exists in the database and might o
   Using this approach also means you have to do the same for every entity which you want to check for changes, UpdateIfModified can be reused with different types due to it's generic implementation
   
  ## SQL generated
-   Using the common context.Update :
+   ### Using the common context.Update : ### 
      ![alt text](https://github.com/Ovidiu00/UpdateExistingEntity/blob/main/Images/update_EfCore.png?raw=true)
   
   
