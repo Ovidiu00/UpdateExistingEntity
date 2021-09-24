@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateObjectEF", "UpdateObjectEF\UpdateObjectEF.csproj", "{7D28EB1E-387E-4D83-A542-C484A8956028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{D67DA11C-1524-4DB9-B741-A22EE02C305F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D28EB1E-387E-4D83-A542-C484A8956028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D28EB1E-387E-4D83-A542-C484A8956028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D28EB1E-387E-4D83-A542-C484A8956028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D28EB1E-387E-4D83-A542-C484A8956028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D67DA11C-1524-4DB9-B741-A22EE02C305F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D67DA11C-1524-4DB9-B741-A22EE02C305F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D67DA11C-1524-4DB9-B741-A22EE02C305F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D67DA11C-1524-4DB9-B741-A22EE02C305F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31F781D3-12C6-44D0-A5EA-366708944C77}
+	EndGlobalSection
+EndGlobal
