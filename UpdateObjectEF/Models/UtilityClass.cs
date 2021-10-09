@@ -24,7 +24,7 @@ namespace UpdateObjectEF.Models
                 object valueExistingEmployee = typeof(T).GetProperty(property.Name).GetValue(existingEntity);
                 object valueExistingEmployeeModified = typeof(T).GetProperty(property.Name).GetValue(modifiedExistingEntity);
 
-                if (valueExistingEmployee != null && !valueExistingEmployee.Equals(valueExistingEmployeeModified)
+                if ( !valueExistingEmployee.Equals(valueExistingEmployeeModified)
                     && IsNotReferenceProperty(property))
                 {
                     if (context.Entry(existingEntity).State == EntityState.Detached)
@@ -45,7 +45,7 @@ namespace UpdateObjectEF.Models
         /// <returns></returns>
         private static bool IsNotReferenceProperty(System.Reflection.PropertyInfo property)
         {
-            return (property.PropertyType.IsPrimitive || property.PropertyType.IsEnum || property.PropertyType == typeof(string) || property.PropertyType.IsValueType);
+            return (property.PropertyType == typeof(string) || property.PropertyType.IsValueType);
         }
     }
 }

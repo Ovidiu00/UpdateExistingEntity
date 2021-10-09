@@ -121,5 +121,30 @@ namespace UnitTests
             //Assert
             Assert.NotEqual(existingEmployee.Department.Id, modifiedExistingEmployee.Department.Id);
         }
+
+        [Fact]
+        public void UpdateIfModified_SexEnumTypeyChangedOfExistingEmployee_ChangesAreReflectedOnExistingEntity()
+        {
+            //Arange
+            Employee existingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                Sex = Sex.FEMALE
+            };
+            Employee modifiedExistingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                Sex = Sex.MALE
+            };
+
+            //Act
+
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+
+
+
+            //Assert
+            Assert.Equal(existingEmployee.Sex, modifiedExistingEmployee.Sex);
+        }
     }
 }
