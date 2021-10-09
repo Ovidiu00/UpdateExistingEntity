@@ -8,7 +8,33 @@ Lets say you recieve an excel containing all the employees, every week, in the e
 
 You read the excel, create the proper employee entity and now you want to update the values coresponding to that employee in the database, typically you would use context.Update(<your Excel entity>) and ef core will atach it to the context with the state of modified and run an update to all the columns.This might work for small objects but having multiple proprieties might cause performance issues.
   
-Another use-case would be recieving form data containing changes of an existing db record through an http put endpoint
+Another use-case would be recieving form data containing changes of an existing db record through an http put endpoint.
+  
+  ### Example of editing an entity recieved in API (BL Layer method)
+   ```c#
+    public async Task<ResponseDTO> EditTransfer(EditTransferDTO editTrasnferDTO)
+        {
+            try
+            {
+                Transfer transfer = await unitOfWork.TransfersRepository.FindSingle(x => x.Id == editTrasnferDTO.Id);
+                if(transfer == null)
+                    return new ResponseDTO { Status = false, Message = "Transfer with given id doesn't exist!" };
+  
+                unitOfWork.TransfersRepository.UpdateIfModified(transfer, mapper.Map<Transfer>(editTrasnferDTO));
+                await unitOfWork.Commit();
+                    
+                return new ResponseDTO { Status = true, Result = mapper.Map<TransferDTO>(transfer) };
+                
+              
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+   ```
+ 
+
   
 
   
