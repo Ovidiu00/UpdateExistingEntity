@@ -21,7 +21,7 @@ namespace UpdateObjectEF
 
 
             var utilityObject = new UtilityClass(context);
-            utilityObject.UpdateIfModified<Employee>(existingEmployee, modifiedExistingEntity);
+            utilityObject.UpdateIfModified<Employee>(existingEmployee, modifiedExistingEntity, nameof(existingEmployee.EmployeeId));
 
             context.SaveChanges();
         }

@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PEA5CLJ\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj": {}
+    "C:\\Users\\40752\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PEA5CLJ\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj": {
+    "C:\\Users\\40752\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PEA5CLJ\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj",
+        "projectUniqueName": "C:\\Users\\40752\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj",
         "projectName": "UpdateObjectEF",
-        "projectPath": "C:\\Users\\PEA5CLJ\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj",
-        "packagesPath": "C:\\Users\\PEA5CLJ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PEA5CLJ\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\obj\\",
+        "projectPath": "C:\\Users\\40752\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\UpdateObjectEF.csproj",
+        "packagesPath": "C:\\Users\\40752\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\40752\\Source\\Repos\\UpdateExistingEntity\\UpdateObjectEF\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\PEA5CLJ\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\40752\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -74,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

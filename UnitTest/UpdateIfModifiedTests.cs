@@ -34,7 +34,7 @@ namespace UnitTests
 
             //Act
 
-            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee,nameof(existingEmployee.EmployeeId));
 
 
 
@@ -60,7 +60,7 @@ namespace UnitTests
 
             //Act
 
-            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee, nameof(existingEmployee.EmployeeId));
 
 
 
@@ -86,7 +86,7 @@ namespace UnitTests
             };
 
             //Act
-            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee, nameof(existingEmployee.EmployeeId));
 
             //Assert
             Assert.Equal(existingEmployee.EmploymentDate, modifiedExistingEmployee.EmploymentDate);
@@ -116,7 +116,7 @@ namespace UnitTests
             };
 
             //Act
-            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee, nameof(existingEmployee.EmployeeId));
 
             //Assert
             Assert.NotEqual(existingEmployee.Department.Id, modifiedExistingEmployee.Department.Id);
@@ -139,12 +139,61 @@ namespace UnitTests
 
             //Act
 
-            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee);
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee, nameof(existingEmployee.EmployeeId));
 
 
 
             //Assert
             Assert.Equal(existingEmployee.Sex, modifiedExistingEmployee.Sex);
+        }
+
+        [Fact]
+        public void UpdateIfModified_PropertyOfExistingEntityIsNullAndNewEntityIsNotNull_PropertyOfExistingEntityIsChangedFromNullToTheNewValue()
+        {
+            //Arange
+            Employee existingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                DepartmentId = null
+            };
+            Employee modifiedExistingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                DepartmentId = 2
+            };
+
+            //Act
+
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee,nameof(existingEmployee.EmployeeId));
+
+
+
+            //Assert
+            Assert.Equal(existingEmployee.DepartmentId, modifiedExistingEmployee.DepartmentId);
+        }
+        [Fact]
+        public void UpdateIfModified_PropertyOfExistingEntityIsNotNullAndNewEntityPropertyIsNull_PropertyOfExistingEntityIsChangedFromNotNullToNull()
+        {
+            //Arange
+            Employee existingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                DepartmentId = 2
+            };
+            Employee modifiedExistingEmployee = new Employee()
+            {
+                EmployeeId = "1",
+                DepartmentId = null
+            };
+
+            //Act
+
+            utilityClass.UpdateIfModified(existingEmployee, modifiedExistingEmployee, nameof(existingEmployee.EmployeeId));
+
+
+
+            //Assert
+            Assert.Equal(existingEmployee.DepartmentId ,modifiedExistingEmployee.DepartmentId);
         }
     }
 }
