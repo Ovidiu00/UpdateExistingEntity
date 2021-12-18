@@ -12,24 +12,26 @@ Another use-case would be recieving form data containing changes of an existing 
   
   ### Example of editing an entity recieved in API (BL Layer method)
    ```c#
-    public async Task<ResponseDTO> EditTransfer(EditTransferDTO editTrasnferDTO)
+     public async Task<DeviceDTO> Handle(EditDeviceCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                Transfer transfer = await unitOfWork.TransfersRepository.FindSingle(x => x.Id == editTrasnferDTO.Id);
-                if(transfer == null)
-                    return new ResponseDTO { Status = false, Message = "Transfer with given id doesn't exist!" };
-  
-                unitOfWork.TransfersRepository.UpdateIfModified(transfer, mapper.Map<Transfer>(editTrasnferDTO));
+                var existingDevice = await unitOfWork.DeviceRepository.FindSingle(x => x.Id == request.id);
+
+                if (existingDevice == null)
+                    throw new DeviceNotFoundException($"Cant find device with id of {request.id}");
+
+                Device modifiedDevice = await deviceMapper.MapEditDeviceDTOtoDeviceEntity(request.deviceToBeEdited);
+
+                unitOfWork.DeviceRepository.UpdateIfModified(existingDevice, modifiedDevice, nameof(existingDevice.Id));
+
                 await unitOfWork.Commit();
-                    
-                return new ResponseDTO { Status = true, Result = mapper.Map<TransferDTO>(transfer) };
-                
-              
+
+                return deviceMapper.MapDeviceEntityToDeviceDTO(modifiedDevice);
             }
-            catch(Exception e)
+            catch (System.Exception)
             {
-                throw e;
+                throw;
             }
         }
    ```
@@ -52,12 +54,12 @@ Once you have your newly entity which already exists in the database and might o
         {
             if(existingEntity.FirstName != modifiedExistingEntity.FirstName)
             {
-                context.Entry(existingEntity).Property("FirstName").CurrentValue = modifiedExistingEntity.FirstName;
+                existingEntity.FirstName = modifiedExistingEntity.FirstName;
             }
 
             if (existingEntity.LastName != modifiedExistingEntity.LastName)
             {
-                context.Entry(existingEntity).Property("LastNane").CurrentValue = modifiedExistingEntity.LastName;
+                 existingEntity.LastName = modifiedExistingEntity.LastName;
             }
 
             // etc...
