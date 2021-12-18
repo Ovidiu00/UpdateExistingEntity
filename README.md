@@ -52,12 +52,12 @@ Once you have your newly entity which already exists in the database and might o
         {
             if(existingEntity.FirstName != modifiedExistingEntity.FirstName)
             {
-                context.Entry(existingEntity).Property("FirstName").CurrentValue = modifiedExistingEntity.FirstName;
+                existingEntity.FirstName = modifiedExistingEntity.FirstName;
             }
 
             if (existingEntity.LastName != modifiedExistingEntity.LastName)
             {
-                context.Entry(existingEntity).Property("LastNane").CurrentValue = modifiedExistingEntity.LastName;
+                 existingEntity.LastName = modifiedExistingEntity.LastName;
             }
 
             // etc...
