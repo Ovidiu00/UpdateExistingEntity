@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UpdateObjectEF.Models
 {
@@ -22,13 +16,13 @@ namespace UpdateObjectEF.Models
         /// 
         /// Modified existing entity's proprieites and changes are reflected when SaveChanges is called.Long story short : Overrides the existing entity with the new entity given as parameter.
         /// Only applies to Value type and string proprieties.
-        
+
         /// </summary>
         /// <param name="existingEntity">Entity that was retrieved from DB (actual values live in DB).If it is not tracked by the context already, it will be tracked after calling this method</param>
         /// <param name="modifiedExistingEntity">Entity recieved in http PUT endpoint or which the client knows exist in DB</param>
-        public  void UpdateIfModified<T>(T existingEntity, T modifiedExistingEntity,string nameOfPrimaryKeyProperty) where T:class
+        public void UpdateIfModified<T>(T existingEntity, T modifiedExistingEntity, string nameOfPrimaryKeyProperty) where T : class
         {
-            var proprieties = GetProprietiesExceptPrimaryKey(existingEntity,nameOfPrimaryKeyProperty);
+            var proprieties = GetProprietiesExceptPrimaryKey(existingEntity, nameOfPrimaryKeyProperty);
 
 
             foreach (var property in proprieties)
@@ -36,32 +30,28 @@ namespace UpdateObjectEF.Models
                 if (IsValueTypeOrString(property) == false)
                     continue;
 
-
                 object valueExistingEmployee = GetValueForProperty(property, existingEntity);
                 object valueExistingEmployeeModified = GetValueForProperty(property, modifiedExistingEntity);
 
-                if (valueExistingEmployee == null)
-                    context.Entry(existingEntity).Property(property.Name).CurrentValue = valueExistingEmployeeModified;       
-                
-              
-                if (valueExistingEmployee != null && !valueExistingEmployee.Equals(valueExistingEmployeeModified))
-                    context.Entry(existingEntity).Property(property.Name).CurrentValue = valueExistingEmployeeModified;
-                
+                if (valueExistingEmployee == null || (valueExistingEmployee != null && !valueExistingEmployee.Equals(valueExistingEmployeeModified)))
+                    SetValueForPropertyOfEntity(valueExistingEmployeeModified, property, existingEntity);
             }
-
-            
         }
 
-        PropertyInfo[] GetProprietiesExceptPrimaryKey<T>(T existingEntity,string nameOfPrimaryKeyProperty) where T:class
+        PropertyInfo[] GetProprietiesExceptPrimaryKey<T>(T existingEntity, string nameOfPrimaryKeyProperty) where T : class
         {
             PropertyInfo[] propritiesOfExistingEntity = existingEntity.GetType().GetProperties();
 
             return propritiesOfExistingEntity.Where(property => property.Name != nameOfPrimaryKeyProperty).ToArray();
         }
 
-        object GetValueForProperty<T>(PropertyInfo property , T entity) where T : class
+        object GetValueForProperty<T>(PropertyInfo property, T entity) where T : class
         {
             return typeof(T).GetProperty(property.Name).GetValue(entity);
+        }
+        void SetValueForPropertyOfEntity<T>(object value, PropertyInfo property, T entity) where T : class
+        {
+            context.Entry(entity).Property(property.Name).CurrentValue = value;
         }
 
         /// <summary>
