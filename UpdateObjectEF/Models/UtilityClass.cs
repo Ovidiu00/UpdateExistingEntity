@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace UpdateObjectEF.Models
@@ -22,7 +23,7 @@ namespace UpdateObjectEF.Models
         /// <param name="modifiedExistingEntity">Entity recieved in http PUT endpoint or which the client knows exist in DB</param>
         public void UpdateIfModified<T>(T existingEntity, T modifiedExistingEntity, string nameOfPrimaryKeyProperty) where T : class
         {
-            var proprieties = GetProprietiesExceptPrimaryKey(existingEntity, nameOfPrimaryKeyProperty);
+            var proprieties = GetProprietiesExceptPrimaryKey(typeof(T), nameOfPrimaryKeyProperty);
 
 
             foreach (var property in proprieties)
@@ -38,9 +39,9 @@ namespace UpdateObjectEF.Models
             }
         }
 
-        PropertyInfo[] GetProprietiesExceptPrimaryKey<T>(T existingEntity, string nameOfPrimaryKeyProperty) where T : class
+        PropertyInfo[] GetProprietiesExceptPrimaryKey(Type type, string nameOfPrimaryKeyProperty)
         {
-            PropertyInfo[] propritiesOfExistingEntity = existingEntity.GetType().GetProperties();
+            PropertyInfo[] propritiesOfExistingEntity = type.GetProperties();
 
             return propritiesOfExistingEntity.Where(property => property.Name != nameOfPrimaryKeyProperty).ToArray();
         }
