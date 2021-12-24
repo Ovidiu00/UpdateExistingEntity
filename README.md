@@ -91,7 +91,7 @@ Once you have your newly entity which already exists in the database and might o
             
             var existingEmployee = context.Employees.Find("123_x");
 
-            var modifiedExistingEntity = new Employee()
+            var modifiedExistingEmployee = new Employee()
             {
                 EmployeeId = "123_x",
                 FirstName = "sfdsfd"
@@ -99,7 +99,7 @@ Once you have your newly entity which already exists in the database and might o
 
 
             var utilityObject = new UtilityClass(context);
-            utilityObject.UpdateIfModified<Employee>(existingEmployee, modifiedExistingEntity);
+            utilityObject.UpdateIfModified<Employee>(existingEmployee, modifiedExistingEmployee);
 
             context.SaveChanges();
   
